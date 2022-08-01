@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { AuthButton } from '../AuthButton'
 import styles from './styles.module.scss'
 
 export function Header() {
@@ -18,7 +19,7 @@ export function Header() {
           </Link>
         </nav>
 
-        <button>Entrar com GitHub</button>
+        <AuthButton />
       </div>
     </header>
   )
