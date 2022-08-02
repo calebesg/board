@@ -15,10 +15,11 @@ button {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   font-weight: 400;
+  outline: none;
 }
 
 body {
-  background-color: global.$bgColor;
+  background-color: global.$bg_color;
 }
 
 a {
