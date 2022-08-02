@@ -1,0 +1,107 @@
+@use '../../styles/variables' as global;
+
+.container {
+  max-width: global.$lg;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: global.$bg_content;
+  border-radius: global.$rounded_md;
+
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      width: 90%;
+      height: 50px;
+      background-color: global.$bg_field;
+      border: 1px solid global.$border_color;
+      border-radius: global.$rounded_md;
+      padding: 0 0.625rem;
+      color: white;
+      transition: border 0.1s ease-out;
+
+      &:focus {
+        border-color: #777;
+      }
+    }
+
+    button {
+      flex: 1;
+      margin-left: 0.5rem;
+      height: 50px;
+      border: none;
+      border-radius: global.$rounded_md;
+      font-size: 1.5rem;
+      background-color: global.$bg_button;
+      filter: brightness(0.9);
+      transition: filter 0.1s ease-out;
+
+      &:hover {
+        filter: brightness(1);
+      }
+    }
+  }
+
+  .amount {
+    color: global.$bg_color;
+    margin: 1.8rem 0;
+    display: inline-block;
+  }
+}
+
+.taskItem {
+  background-color: global.$bg_field;
+  padding: 0.7rem;
+  border-radius: global.$rounded_md;
+
+  strong {
+    color: global.$bg_color;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.1s ease-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .date {
+        color: global.$bg_button;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+
+    button {
+      background-color: transparent;
+      color: white;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      filter: brightness(0.9);
+      transition: filter 0.1s ease-out;
+
+      &:hover {
+        filter: brightness(1);
+      }
+    }
+  }
+}

@@ -1,9 +1,16 @@
-$bgColor: #f2f6fc;
-$bgHeaderColor: #141a29;
-$textPrimary: #141a29;
-$textHightLight: #04dd75;
+$bg_color: #f2f6fc;
+$bg_header: #141a29;
+$bg_content: #17181f;
+$bg_field: #20212c;
+$bg_button: #ffb800;
+$border_color: #424242;
+$text_primary: #141a29;
+$text_highlighted: #04dd75;
 
 //////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 $lg: 70rem; // 1120px
 $md: 43.75rem; // 700px
+
+// Border Radius size
+$rounded_md: 6px;
