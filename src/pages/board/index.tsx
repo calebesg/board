@@ -49,6 +49,14 @@ export default function Board() {
           </article>
         </div>
       </main>
+
+      <div className={styles.vipContainer}>
+        <strong>Obrigado por apoiar esse projeto.</strong>
+        <div>
+          <FiClock />
+          <time>Ultima doação há 3 dias.</time>
+        </div>
+      </div>
     </>
   )
 }

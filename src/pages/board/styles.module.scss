@@ -105,3 +105,25 @@
     }
   }
 }
+
+.vipContainer {
+  max-width: global.$lg;
+  margin: 1rem auto;
+  background-color: global.$bg_content;
+  border-radius: global.$rounded_md;
+  padding: 1rem;
+
+  strong {
+    color: global.$bg_button;
+    font-size: 2rem;
+  }
+
+  div {
+    margin-top: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.4rem;
+  }
+}
