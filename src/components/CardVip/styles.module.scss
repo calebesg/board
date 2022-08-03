@@ -1,0 +1,22 @@
+@use '../../styles/variables' as global;
+
+.container {
+  background-color: global.$bg_content;
+  border-radius: global.$rounded_md;
+  padding: 1rem;
+  margin-top: 3rem;
+
+  strong {
+    color: global.$bg_button;
+    font-size: 1.8rem;
+  }
+
+  div {
+    margin-top: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+  }
+}
