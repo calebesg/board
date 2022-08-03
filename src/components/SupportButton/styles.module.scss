@@ -1,0 +1,26 @@
+@use '../../styles/variables' as global;
+
+.container {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+
+  button {
+    width: 6rem;
+    height: 6rem;
+    border-radius: global.$rounded_full;
+    background-color: global.$bg_button;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.25rem;
+    opacity: 0.9;
+    filter: drop-shadow(2px 1px 5px rgba(0, 0, 0, 0.2));
+    transition: all 0.15s ease-out;
+
+    &:hover {
+      filter: drop-shadow(2px 1px 5px rgba(0, 0, 0, 0.4));
+      opacity: 1;
+    }
+  }
+}
