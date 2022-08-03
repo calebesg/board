@@ -1,10 +1,15 @@
+import { useSession, signIn, signOut } from 'next-auth/react'
 import { FaGithub } from 'react-icons/fa'
 import { FiX } from 'react-icons/fi'
 
 import styles from './styles.module.scss'
 
 export function AuthButton() {
-  const session = false
+  const { data: session } = useSession()
+
+  function auth() {
+    session ? signOut() : signIn()
+  }
 
   function renderContentUnLogged() {
     return (
@@ -29,7 +34,7 @@ export function AuthButton() {
   }
 
   return (
-    <button type="button" className={styles.authButton}>
+    <button type="button" className={styles.authButton} onClick={auth}>
       {session ? renderContentLogged() : renderContentUnLogged()}
     </button>
   )
