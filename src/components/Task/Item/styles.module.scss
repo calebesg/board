@@ -1,0 +1,61 @@
+@use '../../../styles/variables' as global;
+
+.container {
+  background-color: global.$bg_field;
+  padding: 0.7rem;
+  border-radius: global.$rounded_md;
+
+  strong {
+    color: global.$text;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    cursor: pointer;
+    transition: color 0.1s ease-out;
+
+    &:hover {
+      color: global.$text_strong;
+    }
+  }
+
+  footer {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .date {
+      color: global.$bg_button;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .actionButtons {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        background-color: transparent;
+        color: global.$text;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.1s ease-out;
+
+        &:hover {
+          color: global.$text_strong;
+        }
+
+        & + button {
+          &:hover {
+            color: global.$red_500;
+          }
+        }
+      }
+    }
+  }
+}

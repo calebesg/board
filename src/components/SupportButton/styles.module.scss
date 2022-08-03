@@ -1,7 +1,7 @@
 @use '../../styles/variables' as global;
 
 .container {
-  position: absolute;
+  position: fixed;
   bottom: 2rem;
   right: 2rem;
 
