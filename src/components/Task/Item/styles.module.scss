@@ -6,50 +6,55 @@
   border-radius: global.$rounded_md;
 
   strong {
-    color: global.$bg_color;
+    color: global.$text;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.5rem;
-    opacity: 0.8;
     cursor: pointer;
-    transition: opacity 0.1s ease-out;
+    transition: color 0.1s ease-out;
 
     &:hover {
-      opacity: 1;
+      color: global.$text_strong;
     }
   }
 
-  .wrapper {
+  footer {
     width: 100%;
+    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
-    margin-top: 1rem;
+    gap: 1rem;
 
-    .left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-
-      .date {
-        color: global.$bg_button;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-    }
-
-    button {
-      background-color: transparent;
-      color: white;
-      border: none;
+    .date {
+      color: global.$bg_button;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      filter: brightness(0.9);
-      transition: filter 0.1s ease-out;
+    }
 
-      &:hover {
-        filter: brightness(1);
+    .actionButtons {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        background-color: transparent;
+        color: global.$text;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.1s ease-out;
+
+        &:hover {
+          color: global.$text_strong;
+        }
+
+        & + button {
+          &:hover {
+            color: global.$red_500;
+          }
+        }
       }
     }
   }

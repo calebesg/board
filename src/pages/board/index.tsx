@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import { FiClock, FiPlus } from 'react-icons/fi'
+import { FiPlus } from 'react-icons/fi'
 import { CardVip } from '../../components/CardVip'
 import { SupportButton } from '../../components/SupportButton'
 import { List, Task } from '../../components/Task'
@@ -43,8 +43,9 @@ export default function Board() {
         </div>
 
         <CardVip />
-        <SupportButton />
       </main>
+
+      <SupportButton />
     </>
   )
 }

@@ -16,7 +16,7 @@
   h1 {
     font-size: 1.8rem;
     text-align: center;
-    color: global.$text_primary;
+    color: global.$text_strong;
     max-width: global.$md;
   }
 
@@ -24,7 +24,7 @@
     margin-top: 1rem;
     text-align: center;
     font-size: 1.5rem;
-    color: global.$text_primary;
+    color: global.$text_strong;
 
     span {
       color: global.$text_highlighted;
@@ -43,7 +43,7 @@
   span {
     font-size: 1.2rem;
     font-weight: bold;
-    color: global.$text_primary;
+    color: global.$text_strong;
   }
 
   .listDonates {

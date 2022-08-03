@@ -3,6 +3,7 @@
 .container {
   max-width: global.$lg;
   margin: 2rem auto;
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.03));
 
   form {
     display: flex;
@@ -16,11 +17,11 @@
       border: 1px solid global.$border_color;
       border-radius: global.$rounded_md;
       padding: 0 0.625rem;
-      color: white;
+      color: global.$text_strong;
       transition: border 0.1s ease-out;
 
       &:focus {
-        border-color: #777;
+        border-color: rgb(170, 173, 177);
       }
     }
 
@@ -32,11 +33,11 @@
       border-radius: global.$rounded_md;
       font-size: 1.5rem;
       background-color: global.$bg_button;
-      filter: brightness(0.9);
-      transition: filter 0.1s ease-out;
+      opacity: 0.8;
+      transition: opacity 0.1s ease-out;
 
       &:hover {
-        filter: brightness(1);
+        opacity: 1;
       }
     }
   }

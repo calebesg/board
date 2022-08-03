@@ -12,24 +12,23 @@ export function Item({ data }: Props) {
     <li className={styles.container}>
       <strong>{data.title}</strong>
 
-      <div className={styles.wrapper}>
-        <div className={styles.left}>
-          <div className={styles.date}>
-            <FiCalendar />
-            <time>{data.date}</time>
-          </div>
+      <footer>
+        <div className={styles.date}>
+          <FiCalendar />
+          <time>{data.date}</time>
+        </div>
 
+        <div className={styles.actionButtons}>
           <button>
             <FiEdit2 />
             <span>Editar</span>
           </button>
+          <button>
+            <FiTrash />
+            <span>Excluir</span>
+          </button>
         </div>
-
-        <button>
-          <FiTrash />
-          <span>Excluir</span>
-        </button>
-      </div>
+      </footer>
     </li>
   )
 }
