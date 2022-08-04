@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useState } from 'react'
 import { FiPlus } from 'react-icons/fi'
@@ -48,4 +50,21 @@ export default function Board() {
       <SupportButton />
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req })
+
+  if (!session?.id) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }
