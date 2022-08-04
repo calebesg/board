@@ -1,15 +1,26 @@
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
 import Head from 'next/head'
-import { useState } from 'react'
+import { GetServerSideProps } from 'next'
+import { FormEvent, useState } from 'react'
+import { getSession } from 'next-auth/react'
 import { FiPlus } from 'react-icons/fi'
+
 import { CardVip } from '../../components/CardVip'
 import { SupportButton } from '../../components/SupportButton'
 import { List, Task } from '../../components/Task'
 
+import firebase from '../../services/firebaseConfig'
+
 import styles from './styles.module.scss'
 
-export default function Board() {
+interface BoardProps {
+  user: {
+    id: string
+    name: string
+  }
+}
+
+export default function Board({ user }: BoardProps) {
+  const [taskName, setTaskName] = useState('')
   const [tasks, setTasks] = useState<Task[]>([
     {
       id: '1',
@@ -25,6 +36,24 @@ export default function Board() {
     },
   ])
 
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+
+    if (taskName === '') return
+
+    firebase
+      .firestore()
+      .collection('tasks')
+      .add({
+        name: user.name,
+        userId: user.id,
+        task: taskName,
+        created: new Date(),
+      })
+      .then(res => console.log('success'))
+      .catch(err => console.error(err))
+  }
+
   return (
     <>
       <Head>
@@ -33,8 +62,13 @@ export default function Board() {
 
       <main className={styles.container}>
         <div className={styles.content}>
-          <form>
-            <input type="text" placeholder="Digite sua tarefa..." />
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={taskName}
+              onChange={e => setTaskName(e.target.value)}
+              placeholder="Digite sua tarefa..."
+            />
 
             <button type="submit">
               <FiPlus />
@@ -65,6 +99,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   }
 
   return {
-    props: {},
+    props: {
+      user: {
+        id: session?.id,
+        name: session.user?.name,
+      },
+    },
   }
 }
