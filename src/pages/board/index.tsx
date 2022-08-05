@@ -48,6 +48,18 @@ export default function Board({ user, tasks }: BoardProps) {
     setTaskList([...taskList, task])
   }
 
+  async function handleDeleteTask(id: string) {
+    try {
+      await firebase.firestore().collection('tasks').doc(id).delete()
+
+      const updatedTaskList = taskList.filter(item => item.id !== id)
+
+      setTaskList(updatedTaskList)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -69,7 +81,7 @@ export default function Board({ user, tasks }: BoardProps) {
             </button>
           </form>
 
-          <List items={taskList} />
+          <List items={taskList} onDeleteItem={handleDeleteTask} />
         </div>
 
         <CardVip />
