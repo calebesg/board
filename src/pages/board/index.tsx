@@ -31,10 +31,8 @@ export default function Board({ user, tasks }: BoardProps) {
     if (taskName === '') return
 
     const data = {
-      user: {
-        name: user.name,
-        id: user.id,
-      },
+      username: user.name,
+      userId: user.id,
       task: taskName,
       created: new Date(),
     }
@@ -97,6 +95,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const collections = await firebase
     .firestore()
     .collection('tasks')
+    .where('userId', '==', session?.id)
     .orderBy('created', 'asc')
     .get()
 

@@ -3,8 +3,6 @@ export interface Task {
   task: string
   created: Date
   createdFormatted: string
-  user: {
-    name: string
-    id: string
-  }
+  username: string
+  userId: string
 }
