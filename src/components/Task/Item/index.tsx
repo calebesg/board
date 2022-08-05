@@ -7,9 +7,10 @@ import styles from './styles.module.scss'
 interface Props {
   data: Task
   onDelete: (id: string) => void
+  onChange: (task: Task) => void
 }
 
-export function Item({ data, onDelete }: Props) {
+export function Item({ data, onDelete, onChange }: Props) {
   return (
     <li className={styles.container}>
       <Link href={`/board/${data.id}`}>
@@ -23,7 +24,7 @@ export function Item({ data, onDelete }: Props) {
         </div>
 
         <div className={styles.actionButtons}>
-          <button>
+          <button type="button" onClick={() => onChange(data)}>
             <FiEdit2 />
             <span>Editar</span>
           </button>

@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import { FormEvent, useState } from 'react'
 import { getSession } from 'next-auth/react'
 import { format } from 'date-fns'
-import { FiPlus } from 'react-icons/fi'
+import { FiPlus, FiX } from 'react-icons/fi'
 
 import { CardVip } from '../../components/CardVip'
 import { SupportButton } from '../../components/SupportButton'
@@ -25,11 +25,9 @@ export default function Board({ user, tasks }: BoardProps) {
   const [taskName, setTaskName] = useState('')
   const [taskList, setTaskList] = useState<Task[]>(JSON.parse(tasks))
 
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault()
+  const [taskEdited, setTaskEdited] = useState<Task | null>(null)
 
-    if (taskName === '') return
-
+  async function save() {
     const data = {
       username: user.name,
       userId: user.id,
@@ -46,6 +44,42 @@ export default function Board({ user, tasks }: BoardProps) {
     }
 
     setTaskList([...taskList, task])
+    setTaskName('')
+  }
+
+  async function update() {
+    try {
+      await firebase
+        .firestore()
+        .collection('tasks')
+        .doc(taskEdited?.id)
+        .update({ task: taskName })
+
+      const updatedTaskList = taskList.map(item => {
+        if (item.id === taskEdited?.id) {
+          return {
+            ...item,
+            task: taskName,
+          }
+        }
+
+        return item
+      })
+
+      setTaskList(updatedTaskList)
+      setTaskEdited(null)
+      setTaskName('')
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+
+    if (taskName === '') return
+
+    return taskEdited ? update() : save()
   }
 
   async function handleDeleteTask(id: string) {
@@ -60,6 +94,15 @@ export default function Board({ user, tasks }: BoardProps) {
     }
   }
 
+  function handleChangeFormMode(task: Task | null = null) {
+    setTaskEdited(task)
+    setTaskName(task ? task?.task : '')
+  }
+
+  async function handleEditTask(task: Task) {
+    handleChangeFormMode(task)
+  }
+
   return (
     <>
       <Head>
@@ -68,6 +111,14 @@ export default function Board({ user, tasks }: BoardProps) {
 
       <main className={styles.container}>
         <div className={styles.content}>
+          {taskEdited && (
+            <div className={styles.message}>
+              <button onClick={() => handleChangeFormMode()}>
+                <FiX />
+              </button>
+              <span>Você está editando uma tarefa</span>
+            </div>
+          )}
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -81,7 +132,11 @@ export default function Board({ user, tasks }: BoardProps) {
             </button>
           </form>
 
-          <List items={taskList} onDeleteItem={handleDeleteTask} />
+          <List
+            items={taskList}
+            onDeleteItem={handleDeleteTask}
+            onChangeItem={handleEditTask}
+          />
         </div>
 
         <CardVip />

@@ -5,6 +5,35 @@
   margin: 2rem auto;
   filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.03));
 
+  .content {
+    .message {
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      button {
+        display: flex;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        padding: 0.25rem;
+        color: global.$red_500;
+        font-size: 1.5rem;
+        transition: background 0.1s ease-out;
+        border-radius: 50%;
+
+        &:hover {
+          background-color: rgb(255, 46, 46, 0.2);
+        }
+      }
+
+      span {
+        color: global.$text_strong;
+      }
+    }
+  }
+
   form {
     display: flex;
     justify-content: center;

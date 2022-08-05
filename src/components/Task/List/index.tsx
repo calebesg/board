@@ -6,9 +6,10 @@ import styles from './styles.module.scss'
 interface Props {
   items: Task[]
   onDeleteItem: (itemId: string) => void
+  onChangeItem: (task: Task) => void
 }
 
-export function List({ items, onDeleteItem }: Props) {
+export function List({ items, onDeleteItem, onChangeItem }: Props) {
   return (
     <ul className={styles.container}>
       <legend>
@@ -18,7 +19,12 @@ export function List({ items, onDeleteItem }: Props) {
       </legend>
 
       {items.map((item, i) => (
-        <Item key={i} data={item} onDelete={onDeleteItem} />
+        <Item
+          key={i}
+          data={item}
+          onDelete={onDeleteItem}
+          onChange={onChangeItem}
+        />
       ))}
     </ul>
   )
