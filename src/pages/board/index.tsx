@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { FormEvent, useState } from 'react'
 import { getSession } from 'next-auth/react'
+import { format } from 'date-fns'
 import { FiPlus } from 'react-icons/fi'
 
 import { CardVip } from '../../components/CardVip'
@@ -17,41 +18,36 @@ interface BoardProps {
     id: string
     name: string
   }
+  tasks: string
 }
 
-export default function Board({ user }: BoardProps) {
+export default function Board({ user, tasks }: BoardProps) {
   const [taskName, setTaskName] = useState('')
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: '1',
-      date: '17 Julho 2022',
-      title:
-        'Aprenda criar projetos usando Next JS e aplicando firebase como back.',
-    },
-    {
-      id: '1',
-      date: '17 Julho 2022',
-      title:
-        'Aprenda criar projetos usando Next JS e aplicando firebase como back.',
-    },
-  ])
+  const [taskList, setTaskList] = useState<Task[]>(JSON.parse(tasks))
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     if (taskName === '') return
 
-    firebase
-      .firestore()
-      .collection('tasks')
-      .add({
+    const data = {
+      user: {
         name: user.name,
-        userId: user.id,
-        task: taskName,
-        created: new Date(),
-      })
-      .then(res => console.log('success'))
-      .catch(err => console.error(err))
+        id: user.id,
+      },
+      task: taskName,
+      created: new Date(),
+    }
+
+    const doc = await firebase.firestore().collection('tasks').add(data)
+
+    const task: Task = {
+      ...data,
+      id: doc.id,
+      createdFormatted: format(data.created, 'dd MMM yyyy'),
+    }
+
+    setTaskList([...taskList, task])
   }
 
   return (
@@ -75,7 +71,7 @@ export default function Board({ user }: BoardProps) {
             </button>
           </form>
 
-          <List items={tasks} />
+          <List items={taskList} />
         </div>
 
         <CardVip />
@@ -98,12 +94,30 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     }
   }
 
+  const collections = await firebase
+    .firestore()
+    .collection('tasks')
+    .orderBy('created', 'asc')
+    .get()
+
+  const tasks = collections.docs.map(collection => {
+    return {
+      id: collection.id,
+      createdFormatted: format(
+        collection.data().created.toDate(),
+        'dd MMM yyyy'
+      ),
+      ...collection.data(),
+    }
+  })
+
   return {
     props: {
       user: {
         id: session?.id,
         name: session.user?.name,
       },
+      tasks: JSON.stringify(tasks),
     },
   }
 }
