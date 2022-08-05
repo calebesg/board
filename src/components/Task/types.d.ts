@@ -1,5 +1,8 @@
 export interface Task {
   id: string
-  title: string
-  date: string
+  task: string
+  created: Date
+  createdFormatted: string
+  username: string
+  userId: string
 }

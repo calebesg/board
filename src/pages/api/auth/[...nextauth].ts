@@ -1,4 +1,4 @@
-import NextAuth, { Account, Profile, Session, User } from 'next-auth'
+import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 
 export default NextAuth({

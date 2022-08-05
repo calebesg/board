@@ -23,11 +23,8 @@ export function AuthButton() {
   function renderContentLogged() {
     return (
       <>
-        <img
-          src="https://avatars.githubusercontent.com/u/36782514?v=4"
-          alt="avatar"
-        />
-        Calebe Souza
+        <img src={`${session?.user?.image}`} alt={`${session?.user?.name}`} />
+        {session?.user?.name}
         <FiX color="#737380" />
       </>
     )
