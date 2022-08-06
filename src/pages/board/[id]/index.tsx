@@ -1,7 +1,7 @@
+import Head from 'next/head'
 import { format } from 'date-fns'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
-import Head from 'next/head'
 import { FiCalendar } from 'react-icons/fi'
 
 import { Task } from '../../../components/Task'
