@@ -1,7 +1,12 @@
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import Head from 'next/head'
+import { PayPalButtons } from '@paypal/react-paypal-js'
+
+import firebase from '../../services/firebaseConfig'
+
 import styles from './styles.module.scss'
+import { useState } from 'react'
 
 interface DonateProps {
   user: {
@@ -12,6 +17,21 @@ interface DonateProps {
 }
 
 export default function Donate({ user }: DonateProps) {
+  const [approved, setApproved] = useState(false)
+
+  async function handleSaveDonate() {
+    await firebase
+      .firestore()
+      .collection('users')
+      .doc(user.id)
+      .set({
+        donate: true,
+        lastDonate: new Date(),
+        image: user.image,
+      })
+      .then(() => setApproved(true))
+  }
+
   const Congratulate = () => (
     <div className={styles.congratulation}>
       <img src={user.image} alt={user.name} />
@@ -28,7 +48,7 @@ export default function Donate({ user }: DonateProps) {
       <main className={styles.container}>
         <img src="/images/rocket.svg" alt="Seja apoiador" />
 
-        <Congratulate />
+        {approved && <Congratulate />}
 
         <h1>Seja um apoiador desse projeto 🏆</h1>
 
@@ -37,6 +57,26 @@ export default function Donate({ user }: DonateProps) {
         </p>
 
         <strong>Apareça na nossa home tenha funcionalidades exclusivas!</strong>
+
+        <PayPalButtons
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: '1',
+                  },
+                },
+              ],
+            })
+          }}
+          onApprove={(data, actions) => {
+            return actions.order?.capture().then(function (detail) {
+              console.log('Compra aprovada: ' + detail.payer.name?.given_name)
+              handleSaveDonate()
+            }) as Promise<void>
+          }}
+        />
       </main>
     </>
   )
