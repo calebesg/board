@@ -1,9 +1,24 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
+import firebase from '../services/firebaseConfig'
+
 import styles from '../styles/home.module.scss'
 
-export default function Home() {
+type Donate = {
+  id: string
+  image: string
+  donate: boolean
+  lastDonate: string
+}
+
+interface HomeProps {
+  data: string
+}
+
+export default function Home({ data }: HomeProps) {
+  const donaters = JSON.parse(data) as Donate[]
+
   return (
     <>
       <Head>
@@ -27,10 +42,9 @@ export default function Home() {
           <span>Apoiadores</span>
 
           <div className={styles.listDonates}>
-            <img
-              src="https://avatars.githubusercontent.com/u/36782514?v=4"
-              alt="Calebe"
-            />
+            {donaters.map((donate, index) => (
+              <img key={index} src={donate.image} alt={donate.lastDonate} />
+            ))}
           </div>
         </div>
       </main>
@@ -38,9 +52,17 @@ export default function Home() {
   )
 }
 
-const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
+  const donates = await firebase.firestore().collection('users').get()
+
+  const data = JSON.stringify(
+    donates.docs.map(donate => ({ id: donate.id, ...donate.data() }))
+  )
+
   return {
-    props: {},
+    props: {
+      data,
+    },
     revalidate: 60 * 60, // 1h
   }
 }
