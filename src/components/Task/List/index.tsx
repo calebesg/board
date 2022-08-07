@@ -5,11 +5,12 @@ import styles from './styles.module.scss'
 
 interface Props {
   items: Task[]
+  vip: boolean
   onDeleteItem: (itemId: string) => void
   onChangeItem: (task: Task) => void
 }
 
-export function List({ items, onDeleteItem, onChangeItem }: Props) {
+export function List({ items, vip, onDeleteItem, onChangeItem }: Props) {
   return (
     <ul className={styles.container}>
       <legend>
@@ -21,6 +22,7 @@ export function List({ items, onDeleteItem, onChangeItem }: Props) {
       {items.map((item, i) => (
         <Item
           key={i}
+          vip={vip}
           data={item}
           onDelete={onDeleteItem}
           onChange={onChangeItem}
