@@ -17,6 +17,8 @@ interface BoardProps {
   user: {
     id: string
     name: string
+    vip: boolean
+    lastDonate: string | Date
   }
   tasks: string
 }
@@ -134,12 +136,13 @@ export default function Board({ user, tasks }: BoardProps) {
 
           <List
             items={taskList}
+            vip={user.vip}
             onDeleteItem={handleDeleteTask}
             onChangeItem={handleEditTask}
           />
         </div>
 
-        <CardVip />
+        {user.vip && <CardVip lastDonate={user.lastDonate} />}
       </main>
 
       <SupportButton />
@@ -182,6 +185,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
       user: {
         id: session?.id,
         name: session.user?.name,
+        vip: session?.vip,
+        lastDonate: session?.lastDonate,
       },
       tasks: JSON.stringify(tasks),
     },

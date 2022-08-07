@@ -49,11 +49,13 @@
         &:hover {
           color: global.$text_strong;
         }
+      }
 
-        & + button {
-          &:hover {
-            color: global.$red_500;
-          }
+      .btn__delete {
+        margin-left: auto;
+
+        &:hover {
+          color: global.$red_500;
         }
       }
     }
