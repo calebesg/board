@@ -1,12 +1,12 @@
+import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
-import Head from 'next/head'
+import { useState } from 'react'
 import { PayPalButtons } from '@paypal/react-paypal-js'
 
 import firebase from '../../services/firebaseConfig'
 
 import styles from './styles.module.scss'
-import { useState } from 'react'
 
 interface DonateProps {
   user: {
