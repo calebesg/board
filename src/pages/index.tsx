@@ -1,7 +1,9 @@
-import { GetStaticProps } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
+import { GetStaticProps } from 'next'
 
 import firebase from '../services/firebaseConfig'
+import boardImg from '../../public/images/board-user.svg'
 
 import styles from '../styles/home.module.scss'
 
@@ -26,7 +28,7 @@ export default function Home({ data }: HomeProps) {
       </Head>
 
       <main className={styles.content}>
-        <img src="/images/board-user.svg" alt="Ferramenta board" />
+        <Image src={boardImg} alt="Ferramenta board" />
 
         <section className={styles.banner}>
           <h1>
@@ -43,7 +45,13 @@ export default function Home({ data }: HomeProps) {
 
           <div className={styles.listDonates}>
             {donaters.map((donate, index) => (
-              <img key={index} src={donate.image} alt={donate.lastDonate} />
+              <Image
+                key={index}
+                width={64}
+                height={64}
+                src={donate.image}
+                alt={donate.lastDonate}
+              />
             ))}
           </div>
         </div>

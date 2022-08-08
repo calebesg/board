@@ -1,10 +1,12 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 import { PayPalButtons } from '@paypal/react-paypal-js'
 
 import firebase from '../../services/firebaseConfig'
+import rocketImg from '../../../public/images/rocket.svg'
 
 import styles from './styles.module.scss'
 
@@ -34,7 +36,7 @@ export default function Donate({ user }: DonateProps) {
 
   const Congratulate = () => (
     <div className={styles.congratulation}>
-      <img src={user.image} alt={user.name} />
+      <Image src={user.image} width={48} height={48} alt={user.name} />
       <span>Parabéns, agora você é um membro apoiador!</span>
     </div>
   )
@@ -46,7 +48,7 @@ export default function Donate({ user }: DonateProps) {
       </Head>
 
       <main className={styles.container}>
-        <img src="/images/rocket.svg" alt="Seja apoiador" />
+        <Image src={rocketImg} alt="Seja apoiador" />
 
         {approved && <Congratulate />}
 

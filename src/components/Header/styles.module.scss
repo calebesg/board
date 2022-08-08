@@ -6,6 +6,12 @@
   background-color: global.$bg_header;
 }
 
+.logo {
+  position: relative;
+  width: 5rem;
+  height: 100%;
+}
+
 .content {
   max-width: global.$lg;
   height: 100%;

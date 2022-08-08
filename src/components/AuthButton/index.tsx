@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { FaGithub } from 'react-icons/fa'
 import { FiX } from 'react-icons/fi'
@@ -23,7 +24,12 @@ export function AuthButton() {
   function renderContentLogged() {
     return (
       <>
-        <img src={`${session?.user?.image}`} alt={`${session?.user?.name}`} />
+        <Image
+          width={36}
+          height={36}
+          src={`${session?.user?.image}`}
+          alt={`${session?.user?.name}`}
+        />
         {session?.user?.name}
         <FiX color="#737380" />
       </>
