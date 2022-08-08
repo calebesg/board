@@ -54,6 +54,16 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   const snapshot = await firebase.firestore().collection('tasks').doc(id).get()
+
+  if (!snapshot?.data()) {
+    return {
+      redirect: {
+        destination: '/board',
+        permanent: false,
+      },
+    }
+  }
+
   const task = {
     created: snapshot.data()?.created,
     id: snapshot.id,
