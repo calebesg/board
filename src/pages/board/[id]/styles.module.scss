@@ -3,6 +3,10 @@
 .container {
   max-width: global.$lg;
   margin: 2rem auto;
+
+  @media (max-width: 600px) {
+    padding: 0 1rem;
+  }
 }
 
 .card {
