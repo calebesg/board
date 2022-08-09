@@ -16,7 +16,7 @@ export function AuthButton() {
     return (
       <>
         <FaGithub color="#FFBB00" />
-        Entrar com GitHub
+        <span className={styles.label}>Entrar com GitHub</span>
       </>
     )
   }
@@ -30,7 +30,7 @@ export function AuthButton() {
           src={`${session?.user?.image}`}
           alt={`${session?.user?.name}`}
         />
-        {session?.user?.name}
+        <span className={styles.label}>{session?.user?.name}</span>
         <FiX color="#737380" />
       </>
     )
