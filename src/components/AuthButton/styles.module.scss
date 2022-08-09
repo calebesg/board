@@ -20,4 +20,14 @@
   svg {
     font-size: 1.25rem;
   }
+
+  @media (max-width: 600px) {
+    .label {
+      display: none;
+    }
+
+    span + svg {
+      display: none;
+    }
+  }
 }

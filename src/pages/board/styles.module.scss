@@ -32,6 +32,10 @@
         color: global.$text_strong;
       }
     }
+
+    @media (max-width: 600px) {
+      padding: 1.5rem 1rem;
+    }
   }
 
   form {
@@ -52,6 +56,10 @@
       &:focus {
         border-color: rgb(170, 173, 177);
       }
+
+      @media (max-width: 600px) {
+        width: 80%;
+      }
     }
 
     button {
@@ -69,6 +77,10 @@
         opacity: 1;
       }
     }
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 1rem;
   }
 }
 

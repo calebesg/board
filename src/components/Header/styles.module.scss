@@ -40,4 +40,9 @@
       }
     }
   }
+
+  @media (max-width: 600px) {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
 }
